@@ -1,0 +1,69 @@
+# Harsh Nirala | Premium Personal Portfolio
+
+A premium, highly interactive single-page personal portfolio website featuring a modern **"Dark Nebula" & Glassmorphism** aesthetic. Built from scratch using Vanilla HTML5, CSS3, and modern JavaScript, it delivers a high-performance, responsive experience without framework overhead.
+
+---
+
+## 🌟 Key Features
+
+- **Interactive Background Nebula**: A canvas-based interactive particle field that floats and reacts dynamically to cursor movements.
+- **Role Typewriter Loop**: An automated typing effect showcasing professional roles and titles (Full Stack Developer, CS Student, AI Builder, etc.).
+- **Technical Expertise Grids**: Interactive category-grouped grids highlighting languages, frameworks, AI/ML utilities, and tools.
+- **Interactive Project Hub**: A grid of six modular project cards. Clicking "Learn More" triggers a smooth glassmorphic detail modal rendering key features, technical details, and direct links.
+- **Responsive Navigation**: Mobile-responsive drawer navigation with active-link indicators synced to your scroll position.
+- **Resume Download Integrations**: Direct access to your downloadable resume from both the header navigation and a prominent About section CTA button.
+- **Contact Dispatcher Mockup**: Sleek feedback form with animated focus states and interactive submission handlers.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core**: HTML5 & ES6+ JavaScript
+- **Styling**: Vanilla CSS3 (utilizing modern CSS variables and HSL color modeling)
+- **Typography**: Google Fonts (Space Grotesk, Outfit, Inter)
+- **Icons**: FontAwesome v6.4
+
+---
+
+## 📁 Project Structure
+
+```bash
+├── docs/
+│   └── Harsh_Nirala_Resume.pdf  # Downloadable PDF Resume
+├── index.html                    # Main HTML5 semantic structure
+├── me.jpg                        # Grayscale portrait photo
+├── push.ps1                      # Git deploy PowerShell automation
+├── script.js                     # Canvas particle loop, typewriter & modals
+├── style.css                     # Colors, glassmorphism panel & animations
+└── README.md                     # Project documentation
+```
+
+---
+
+## 🚀 Running Locally
+
+To host the static files on a local server, you can use Python's built-in HTTP server:
+
+1. Open your terminal in the project directory:
+   ```bash
+   cd d:\TP\ANTIGRAVITY\P-2
+   ```
+2. Start the local server:
+   ```bash
+   python -m http.server 3000
+   ```
+3. Open your browser and navigate to:
+   👉 **[http://localhost:3000/](http://localhost:3000/)**
+
+---
+
+## 🌐 Deploying to GitHub
+
+We have provided a automated deploy script to make pushing your new website to GitHub simple:
+
+1. Make sure you have created an empty repository on your account at [github.com/new](https://github.com/new). Do **not** initialize it with a README.
+2. In your terminal inside the project directory, run:
+   ```powershell
+   .\push.ps1
+   ```
+3. The script will initialize your local Git branch, commit the files, link your GitHub repository, and open a secure popup window to authenticate and complete the upload.
