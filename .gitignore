@@ -1,0 +1,21 @@
+# System logs
+*.log
+
+# Cache files
+.DS_Store
+
+# Local search and verify scripts
+scratch/
+find_attached_image.py
+check_previous_project.py
+check_p1.py
+list_accessible.py
+list_brain.py
+parse_transcripts.py
+preview_txt.py
+read_projects_exp.py
+read_self_data.py
+search_text.py
+verify_project.py
+copy_portrait.py
+copy_resume.py

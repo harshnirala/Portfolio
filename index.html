@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Harsh Nirala, a Computer Science student and Full Stack Developer passionate about building web applications, AI-powered solutions, and scalable backend systems.">
+    <meta name="keywords" content="Harsh Nirala, Full Stack Developer, Computer Science Student, AI Developer, Parul University, Vadodara, Unstop Intern, Web Engineer">
+    <meta name="author" content="Harsh Nirala">
+    <meta property="og:title" content="Harsh Nirala | Full Stack Engineer & AI Developer">
+    <meta property="og:description" content="Explore portfolio projects, skills, and professional experience of Harsh Nirala.">
+    <meta property="og:type" content="website">
+    
+    <title>Harsh Nirala | Full Stack Engineer & AI Developer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Preloader -->
+    <div id="preloader" class="preloader-overlay">
+        <div class="preloader-content">
+            <div class="glow-ring"></div>
+            <div class="logo-text">HN</div>
+            <div class="progress-bar-container">
+                <div id="preloader-progress" class="progress-bar"></div>
+            </div>
+            <span class="loading-status">Initializing System...</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar-header">
+        <div class="navbar-container">
+            <a href="#home" class="nav-logo" id="logo-link">
+                <span class="logo-bracket">&lt;</span>HN<span class="logo-bracket">/&gt;</span>
+            </a>
+            
+            <button class="mobile-toggle" id="menu-toggle-btn" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active" id="nav-home">Home</a>
+                <a href="#about" class="nav-link" id="nav-about">About</a>
+                <a href="#skills" class="nav-link" id="nav-skills">Skills</a>
+                <a href="#experience" class="nav-link" id="nav-experience">Experience</a>
+                <a href="#projects" class="nav-link" id="nav-projects">Projects</a>
+                <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+                <a href="docs/Harsh_Nirala_Resume.pdf" class="nav-link" id="nav-resume" target="_blank">Resume</a>
+                <a href="mailto:info.driftking.harshnirala@gmail.com" class="nav-cta" id="nav-cta-email">Hire Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content-container">
+                <div class="hero-greetings">
+                    <span class="glow-tag">Available For Work</span>
+                </div>
+                <h1 id="hero-title" class="hero-main-title">
+                    Hi, I'm <span class="accent-gradient">Harsh Nirala</span>
+                </h1>
+                <div class="hero-subtitle">
+                    <span class="static-subtitle">A</span>
+                    <span id="typed-role" class="dynamic-subtitle">Full Stack Developer</span>
+                    <span class="cursor-blink">|</span>
+                </div>
+                <p class="hero-paragraph">
+                    Computer Science student and Full Stack Developer passionate about building high-performance web applications, AI-powered solutions, and scalable backend systems.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn btn-primary" id="hero-cta-work">
+                        <span>View My Work</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary" id="hero-cta-contact">
+                        <span>Let's Talk</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <a href="#about" aria-label="Scroll Down">
+                    <span class="mouse-icon">
+                        <span class="mouse-wheel"></span>
+                    </span>
+                    <span class="scroll-text">Scroll Down</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">About Me</span>
+                    <h2 class="section-title">My Journey & Drive</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-image-container">
+                        <div class="about-image-wrapper glass-panel">
+                            <img src="me.jpg" alt="Harsh Nirala Profile" id="about-profile-img">
+                            <div class="image-glow-ring"></div>
+                        </div>
+                    </div>
+                    <div class="about-text-content">
+                        <p class="about-lead">
+                            I design and build tools that live on the internet, turning complex requirements into seamless, performant digital solutions.
+                        </p>
+                        <p class="about-body">
+                            I am currently pursuing a degree in Computer Science at <strong>Parul University</strong> in Vadodara, Gujarat. I enjoy breaking complex problems down, building clean database layouts, and engineering robust APIs. My goal is to write code that is not only functional and secure but also visually impactful.
+                        </p>
+                        <p class="about-body">
+                            Whether experimenting with advanced LLM agents or building responsive, interactive front-ends using React and Tailwind CSS, I am always seeking ways to push the envelope of software engineering.
+                        </p>
+                        <div class="about-ctas" style="margin-top: 30px;">
+                            <a href="docs/Harsh_Nirala_Resume.pdf" class="btn btn-primary" id="btn-about-resume" target="_blank">
+                                <i class="fa-solid fa-download"></i> <span>Download Resume</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stats-container">
+                        <!-- Stat Card 1 -->
+                        <div class="stat-card glass-panel" id="stat-experience">
+                            <div class="stat-icon-wrapper purple-glow">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">1+</span>
+                                <span class="stat-label">Internship</span>
+                            </div>
+                            <div class="stat-desc">Software Intern at Unstop</div>
+                        </div>
+                        
+                        <!-- Stat Card 2 -->
+                        <div class="stat-card glass-panel" id="stat-projects">
+                            <div class="stat-icon-wrapper cyan-glow">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">6+</span>
+                                <span class="stat-label">AI & Web Projects</span>
+                            </div>
+                            <div class="stat-desc">Production-ready setups</div>
+                        </div>
+
+                        <!-- Stat Card 3 -->
+                        <div class="stat-card glass-panel" id="stat-education">
+                            <div class="stat-icon-wrapper indigo-glow">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">CS</span>
+                                <span class="stat-label">Undergrad</span>
+                            </div>
+                            <div class="stat-desc">Parul University student</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Skills</span>
+                    <h2 class="section-title">Technical Expertise</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Category 1: Languages & DBs -->
+                    <div class="skills-category-card glass-panel" id="skills-category-languages">
+                        <h3 class="category-title"><i class="fa-solid fa-code"></i> Languages & Databases</h3>
+                        <div class="skills-list">
+                            <div class="skill-item" title="TypeScript">
+                                <i class="fa-brands fa-js" style="color: #3178C6;"></i>
+                                <span>TypeScript</span>
+                            </div>
+                            <div class="skill-item" title="JavaScript">
+                                <i class="fa-brands fa-square-js" style="color: #F7DF1E;"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item" title="Python">
+                                <i class="fa-brands fa-python" style="color: #3776AB;"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item" title="MongoDB">
+                                <i class="fa-solid fa-database" style="color: #47A248;"></i>
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="skill-item" title="PostgreSQL">
+                                <i class="fa-solid fa-database" style="color: #336791;"></i>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <div class="skill-item" title="SQL">
+                                <i class="fa-solid fa-table" style="color: #F80000;"></i>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Frameworks & Libs -->
+                    <div class="skills-category-card glass-panel" id="skills-category-frameworks">
+                        <h3 class="category-title"><i class="fa-solid fa-cubes"></i> Frameworks & Libraries</h3>
+                        <div class="skills-list">
+                            <div class="skill-item" title="React">
+                                <i class="fa-brands fa-react" style="color: #61DAFB;"></i>
+                                <span>React</span>
+                            </div>
+                            <div class="skill-item" title="Next.js">
+                                <i class="fa-solid fa-chevron-right" style="color: #e2e8f0;"></i>
+                                <span>Next.js</span>
+                            </div>
+                            <div class="skill-item" title="Express.js">
+                                <i class="fa-solid fa-server" style="color: #94a3b8;"></i>
+                                <span>Express.js</span>
+                            </div>
+                            <div class="skill-item" title="Tailwind CSS">
+                                <i class="fa-brands fa-css3-alt" style="color: #06B6D4;"></i>
+                                <span>Tailwind CSS</span>
+                            </div>
+                            <div class="skill-item" title="Node.js">
+                                <i class="fa-brands fa-node-js" style="color: #339933;"></i>
+                                <span>Node.js</span>
+                            </div>
+                            <div class="skill-item" title="FastAPI">
+                                <i class="fa-solid fa-bolt" style="color: #092E20;"></i>
+                                <span>FastAPI / Django</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: AI & LLMs -->
+                    <div class="skills-category-card glass-panel" id="skills-category-ai">
+                        <h3 class="category-title"><i class="fa-solid fa-brain"></i> AI, ML & LLMs</h3>
+                        <div class="skills-list">
+                            <div class="skill-item" title="PyTorch">
+                                <i class="fa-solid fa-network-wired" style="color: #EE4C2C;"></i>
+                                <span>PyTorch</span>
+                            </div>
+                            <div class="skill-item" title="LangChain">
+                                <i class="fa-solid fa-link" style="color: #1664C0;"></i>
+                                <span>LangChain</span>
+                            </div>
+                            <div class="skill-item" title="Ollama">
+                                <i class="fa-solid fa-robot" style="color: #a855f7;"></i>
+                                <span>Ollama</span>
+                            </div>
+                            <div class="skill-item" title="Groq API">
+                                <i class="fa-solid fa-microchip" style="color: #F55036;"></i>
+                                <span>Groq / VAPI</span>
+                            </div>
+                            <div class="skill-item" title="Gemini & Whisper">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #1A73E8;"></i>
+                                <span>Gemini / Whisper</span>
+                            </div>
+                            <div class="skill-item" title="ChromaDB">
+                                <i class="fa-solid fa-box-archive" style="color: #47A248;"></i>
+                                <span>ChromaDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 4: Tools & Platforms -->
+                    <div class="skills-category-card glass-panel" id="skills-category-tools">
+                        <h3 class="category-title"><i class="fa-solid fa-sliders"></i> Tools & Platforms</h3>
+                        <div class="skills-list">
+                            <div class="skill-item" title="Git">
+                                <i class="fa-brands fa-git-alt" style="color: #F05032;"></i>
+                                <span>Git</span>
+                            </div>
+                            <div class="skill-item" title="GitHub">
+                                <i class="fa-brands fa-github" style="color: #e2e8f0;"></i>
+                                <span>GitHub</span>
+                            </div>
+                            <div class="skill-item" title="CI/CD">
+                                <i class="fa-solid fa-gears" style="color: #D24939;"></i>
+                                <span>CI/CD & Jenkins</span>
+                            </div>
+                            <div class="skill-item" title="Postman">
+                                <i class="fa-solid fa-envelope-open-text" style="color: #FF6C37;"></i>
+                                <span>Postman</span>
+                            </div>
+                            <div class="skill-item" title="Supabase">
+                                <i class="fa-solid fa-cloud-bolt" style="color: #3ECF8E;"></i>
+                                <span>Supabase & Convex</span>
+                            </div>
+                            <div class="skill-item" title="AWS EC2">
+                                <i class="fa-brands fa-aws" style="color: #FF9900;"></i>
+                                <span>AWS EC2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Experience</span>
+                    <h2 class="section-title">Professional Journey</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Timeline Node -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot-wrapper">
+                            <div class="timeline-dot"></div>
+                        </div>
+                        <div class="timeline-card glass-panel">
+                            <div class="timeline-header">
+                                <div class="timeline-role-info">
+                                    <h3 class="experience-role">Software Developer Intern</h3>
+                                    <h4 class="experience-company">
+                                        <a href="https://www.unstop.com/" target="_blank" rel="noopener noreferrer" class="company-link">Unstop <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                    </h4>
+                                </div>
+                                <span class="experience-duration"><i class="fa-solid fa-calendar-days"></i> Sep 2024 - Present</span>
+                            </div>
+                            <ul class="experience-details">
+                                <li>Integrated AI-driven n8n automation workflows across internal REST API endpoints and a custom CMS, adding white-label support and dynamic window-title configuration.</li>
+                                <li>Built an AI workflow system to auto-generate and validate vendor assignments, cutting creation and validation time by 60–70%.</li>
+                                <li>Enhanced front-end UI components to surface the new workflow system, streamlining vendor-facing task flows.</li>
+                                <li>Managed CI/CD pipelines via Git and Jenkins to maintain consistent deployments across environments.</li>
+                                <li>Tracked sprint progress and maintained technical documentation in Jira and Confluence.</li>
+                            </ul>
+                            <div class="experience-tech-stack">
+                                <span class="tech-badge">n8n</span>
+                                <span class="tech-badge">REST APIs</span>
+                                <span class="tech-badge">Git</span>
+                                <span class="tech-badge">Jenkins</span>
+                                <span class="tech-badge">Jira</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Portfolio</span>
+                    <h2 class="section-title">Featured Creations</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: TestIQ -->
+                    <div class="project-card glass-panel" id="project-card-1">
+                        <div class="project-content">
+                            <h3 class="project-title">TestIQ</h3>
+                            <p class="project-summary">CLI RAG pipeline using LangChain and ChromaDB that analyzes codebases and auto-generates unit tests with AST parsing.</p>
+                            <div class="project-tech">
+                                <span>LangChain</span>
+                                <span>ChromaDB</span>
+                                <span>Ollama</span>
+                                <span>Python</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-1" data-project-id="1">Learn More</button>
+                            <a href="https://github.com/harshnirala/testiq" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: VidyaMarg -->
+                    <div class="project-card glass-panel" id="project-card-2">
+                        <div class="project-content">
+                            <h3 class="project-title">VidyaMarg</h3>
+                            <p class="project-summary">AI learning path generator rendering goal-based roadmaps as interactive DAG networks in React Flow.</p>
+                            <div class="project-tech">
+                                <span>Next.js</span>
+                                <span>FastAPI</span>
+                                <span>Groq</span>
+                                <span>React Flow</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-2" data-project-id="2">Learn More</button>
+                            <div class="footer-links">
+                                <a href="https://github.com/harshnirala/vidyamarg" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://vidya-marg.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="Live Demo">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Curely -->
+                    <div class="project-card glass-panel" id="project-card-3">
+                        <div class="project-content">
+                            <h3 class="project-title">Curely</h3>
+                            <p class="project-summary">Real-time voice AI medical assistant built on VAPI and Whisper, with Gemini handling responses.</p>
+                            <div class="project-tech">
+                                <span>VAPI</span>
+                                <span>Whisper</span>
+                                <span>Gemini</span>
+                                <span>OpenRouter</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-3" data-project-id="3">Learn More</button>
+                            <div class="footer-links">
+                                <a href="https://github.com/harshnirala/curely" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://curely.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="Live Demo">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Orphia -->
+                    <div class="project-card glass-panel" id="project-card-4">
+                        <div class="project-content">
+                            <h3 class="project-title">Orphia</h3>
+                            <p class="project-summary">AI music generator turning text prompts into original audio using PyTorch RNN/LSTM models.</p>
+                            <div class="project-tech">
+                                <span>PyTorch</span>
+                                <span>Next.js</span>
+                                <span>TypeScript</span>
+                                <span>Tailwind</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-4" data-project-id="4">Learn More</button>
+                            <div class="footer-links">
+                                <a href="https://github.com/harshnirala/Orphia-AI-Music-Generator" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://orphia.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="Live Demo">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: CppTestGenAI -->
+                    <div class="project-card glass-panel" id="project-card-5">
+                        <div class="project-content">
+                            <h3 class="project-title">CppTestGenAI</h3>
+                            <p class="project-summary">Build-free static analysis tool scanning C++ projects with CodeLlama via Ollama to predict test cases.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Ollama</span>
+                                <span>CodeLlama</span>
+                                <span>YAML</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-5" data-project-id="5">Learn More</button>
+                            <a href="https://github.com/harshnirala/CppTestGenAI" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Ideascribe -->
+                    <div class="project-card glass-panel" id="project-card-6">
+                        <div class="project-content">
+                            <h3 class="project-title">Ideascribe</h3>
+                            <p class="project-summary">Collaborative note-taking app for developers with rich-text editor and real-time state sync.</p>
+                            <div class="project-tech">
+                                <span>Next.js</span>
+                                <span>Convex</span>
+                                <span>Clerk</span>
+                                <span>Edge Store</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn btn-card-details" id="btn-project-6" data-project-id="6">Learn More</button>
+                            <div class="footer-links">
+                                <a href="https://github.com/harshnirala/ideascribe" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="GitHub Repository">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://ideascribe.vercel.app/" target="_blank" rel="noopener noreferrer" class="card-icon-link" aria-label="Live Demo">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section scroll-reveal">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2 class="section-title">Start A Conversation</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info-column">
+                        <h3 class="contact-subheading">Contact Information</h3>
+                        <p class="contact-desc">
+                            Feel free to reach out for internship opportunities, project collaborations, or just to say hi! I typically reply within a few hours.
+                        </p>
+                        
+                        <div class="contact-details-list">
+                            <div class="contact-detail-item">
+                                <div class="contact-detail-icon purple-glow">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="contact-detail-content">
+                                    <span class="contact-label">Email</span>
+                                    <a href="mailto:info.driftking.harshnirala@gmail.com" class="contact-value" id="link-email">info.driftking.harshnirala@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-detail-item">
+                                <div class="contact-detail-icon cyan-glow">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="contact-detail-content">
+                                    <span class="contact-label">Location</span>
+                                    <span class="contact-value">Vadodara, Gujarat, India</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-detail-item">
+                                <div class="contact-detail-icon indigo-glow">
+                                    <i class="fa-solid fa-university"></i>
+                                </div>
+                                <div class="contact-detail-content">
+                                    <span class="contact-label">Education</span>
+                                    <span class="contact-value">Parul University (CS Undergrad)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links-container">
+                            <a href="https://github.com/harshnirala" target="_blank" rel="noopener noreferrer" class="social-icon-btn github-glow" id="link-github" aria-label="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/harshnirala/" target="_blank" rel="noopener noreferrer" class="social-icon-btn linkedin-glow" id="link-linkedin" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://leetcode.com/u/0aY5IcfMEq/" target="_blank" rel="noopener noreferrer" class="social-icon-btn leetcode-glow" id="link-leetcode" aria-label="LeetCode">
+                                <i class="fa-solid fa-code"></i>
+                            </a>
+                            <a href="https://twitter.com/harshnirala" target="_blank" rel="noopener noreferrer" class="social-icon-btn twitter-glow" id="link-twitter" aria-label="Twitter">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Card -->
+                    <div class="contact-form-column glass-panel">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="input-name" class="form-label">Full Name</label>
+                                <input type="text" id="input-name" name="name" class="form-input" placeholder="e.g. John Doe" required>
+                                <span class="input-focus-line"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input-email" class="form-label">Email Address</label>
+                                <input type="email" id="input-email" name="email" class="form-input" placeholder="e.g. john@example.com" required>
+                                <span class="input-focus-line"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-subject" class="form-label">Subject</label>
+                                <input type="text" id="input-subject" name="subject" class="form-input" placeholder="Project Inquiry, Internship, etc." required>
+                                <span class="input-focus-line"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input-message" class="form-label">Your Message</label>
+                                <textarea id="input-message" name="message" class="form-textarea" placeholder="Write your message here..." rows="5" required></textarea>
+                                <span class="input-focus-line"></span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" id="btn-submit">
+                                <span>Send Message</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        <div id="form-feedback" class="form-feedback-message"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">&lt;HN/&gt;</div>
+            <p class="footer-tagline">Architecting intelligent web systems & scalable backend codebases.</p>
+            <div class="footer-separator"></div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Harsh Nirala. All rights reserved.</p>
+                <p class="footer-credit">Handcrafted with <i class="fa-solid fa-heart" style="color: #EE4C2C;"></i> & Vanilla CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Project Modal Overlay -->
+    <div id="project-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+        <div class="modal-card glass-panel">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-content">
+                <h3 class="modal-project-name" id="modal-project-name">Project Title</h3>
+                <div class="modal-body-scroll">
+                    <p class="modal-project-desc" id="modal-project-desc">Project Description</p>
+                    
+                    <h4 class="modal-section-title">Key Technical Features</h4>
+                    <ul class="modal-features-list" id="modal-features-list">
+                        <!-- Populated by javascript -->
+                    </ul>
+                    
+                    <h4 class="modal-section-title">Tech Stack</h4>
+                    <div class="modal-project-tech" id="modal-project-tech">
+                        <!-- Populated by javascript -->
+                    </div>
+                </div>
+                
+                <div class="modal-links" id="modal-project-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modal-github-link">
+                        <i class="fa-brands fa-github"></i> <span>GitHub Code</span>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="modal-demo-link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Live Demo</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entrypoint -->
+    <script src="script.js"></script>
+</body>
+</html>
