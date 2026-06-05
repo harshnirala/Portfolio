@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to build a local CLI RAG pipeline using LangChain, ChromaDB, tree-sitter, and Ollama to index codebases and automate unit test generation.">
+    <meta name="author" content="Harsh Nirala">
+    <title>Automating Code Quality: Local CLI RAG Pipeline | Harsh Nirala Blog</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Inline Theme Initializer -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+<body>
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="navbar-header">
+        <div class="navbar-container">
+            <a href="../#home" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>HN<span class="logo-bracket">/&gt;</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="../#home" class="nav-link">Home</a>
+                <a href="../#about" class="nav-link">About</a>
+                <a href="../#projects" class="nav-link">Projects</a>
+                <a href="../#blog" class="nav-link active">Blog</a>
+                <a href="../#contact" class="nav-link">Contact</a>
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <a href="../#blog" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> <span>Back to Blog</span>
+        </a>
+        
+        <article class="article-card glass-panel">
+            <div class="blog-card-meta article-post-meta">
+                <span class="article-date"><i class="fa-solid fa-calendar-days"></i> May 15, 2026</span>
+                <span class="article-readtime"><i class="fa-solid fa-clock"></i> 6 min read</span>
+                <span class="article-category"><i class="fa-solid fa-tag"></i> AI &amp; Testing</span>
+            </div>
+            
+            <h1 class="article-post-title">Automating Code Quality: Building a Local CLI RAG Pipeline for Auto-Testing</h1>
+            
+            <div class="article-post-body">
+                <p>Writing comprehensive unit tests is often seen as a necessary chore. For large scale codebases, keeping tests synchronized with changing method APIs and logical branches demands constant developer overhead. However, with modern Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) pipelines, we can automate this process locally. In this post, we'll walk through building a CLI-based automated testing pipeline (inspired by the architecture of <strong>TestIQ</strong>) that parses source directories, queries local models via Ollama, and utilizes self-correcting validation loops.</p>
+
+                <h2>The Architecture of an Autonomous Test Generator</h2>
+                <p>Creating tests with a simple LLM prompt fails because LLMs lack contextual knowledge of codebase dependencies, custom helper files, and setup configurations. An autonomous RAG pipeline solves this by indexing the codebase structure and leveraging context injection during generation. The execution flow consists of three primary layers:</p>
+                
+                <blockquote>
+                    <strong>1. Semantic Ingestion & Code Indexing:</strong> Codebase scanning, syntax hierarchy tree extraction, and vector index generation.<br>
+                    <strong>2. Retrieval & Prompt Construction:</strong> Injecting helper utilities and framework standards into the generator prompt.<br>
+                    <strong>3. Local LLM Generation & Self-Correction:</strong> Executing code generation loops and running automated test suites to validate and fix syntax errors on-the-fly.
+                </blockquote>
+
+                <h2>Step 1: Code Parsing with Tree-Sitter & LangChain</h2>
+                <p>Regular text splitters fail on source code because they break apart syntax structures (like class definitions or functions) randomly. Instead, we use <code>tree-sitter</code> to parse source code files into Abstract Syntax Trees (ASTs). This allows us to extract individual method declarations, parameters, and inline docstrings cleanly.</p>
+
+                <p>We chunk the files based on functions and class boundaries and load them into a vector database (e.g., <strong>ChromaDB</strong>) using local embeddings. Below is a simplified snippet showcasing semantic class parsing:</p>
+
+                <pre><code>from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import OllamaEmbeddings
+from tree_sitter import Language, Parser
+
+# Load language parser (e.g. Python)
+Language.build_library('build/my-languages.so', ['tree-sitter-python'])
+PY_LANG = Language('build/my-languages.so', 'python')
+parser = Parser()
+parser.set_language(PY_LANG)
+
+def extract_functions(source_code):
+    tree = parser.parse(bytes(source_code, "utf8"))
+    root_node = tree.root_node
+    # Traverse nodes to pull function and class blocks
+    # (returns individual logical code chunks)
+    ...
+</code></pre>
+
+                <h2>Step 2: Retrieval-Augmented Generation (RAG) Loop</h2>
+                <p>When the developer requests tests for a target module, the CLI pipeline queries ChromaDB for structurally related components—such as database mocks, custom exception classes, or mock test configurations. These retrieved code segments are injected into the LLM system prompt as context, instructing the local model (e.g., <code>codellama:7b</code> running via Ollama) on the specific mock structures to use.</p>
+
+                <h2>Step 3: Self-Correcting Execution Loops</h2>
+                <p>Local models can sometimes make syntax errors or hallucinate API calls. To prevent broken tests from polluting the repository, the pipeline executes the generated test file locally using a virtual test environment runner (like <code>pytest</code>). If the run fails, the stdout error trace is fed back into the LLM model with a request to correct the code. The loop repeats until all tests pass.</p>
+
+                <pre><code>import subprocess
+
+def validate_generated_test(test_file_path, target_module_path):
+    # Execute pytest as a local subprocess
+    result = subprocess.run(["pytest", test_file_path], capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        print("[WARNING] Verification failed! Sending errors to correction loop...")
+        return False, result.stderr
+        
+    print("[SUCCESS] Test compiled and passed perfectly!")
+    return True, None
+</code></pre>
+
+                <h2>Key Results & Advantages</h2>
+                <p>By leveraging local models and RAG pipeline configurations, developers achieve:</p>
+                <ul>
+                    <li><strong>Data Privacy:</strong> No code leaves the developer's computer, bypassing enterprise security risks.</li>
+                    <li><strong>Accelerated Workflows:</strong> Reduces initial test coverage generation times from hours to seconds.</li>
+                    <li><strong>Higher Test Integrity:</strong> Test files are guaranteed to compile and run prior to staging.</li>
+                </ul>
+
+                <p>Automated code quality tools represent the future of software engineering. By building self-correcting pipelines like TestIQ, we shift from manually writing boilerplate assertions to supervising self-verifying, robust code generation systems.</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">&lt;HN/&gt;</div>
+            <p class="footer-tagline">Architecting intelligent web systems & scalable backend codebases.</p>
+            <div class="footer-separator"></div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Harsh Nirala. All rights reserved.</p>
+                <p class="footer-credit">Handcrafted with <i class="fa-solid fa-heart" style="color: #EE4C2C;"></i> & Vanilla CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Entrypoint -->
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -4,31 +4,40 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
     const progress = document.getElementById("preloader-progress");
-    const statusText = preloader.querySelector(".loading-status");
+    const statusText = preloader ? preloader.querySelector(".loading-status") : null;
     
-    let loadValue = 0;
-    const progressInterval = setInterval(() => {
-        loadValue += Math.floor(Math.random() * 15) + 5;
-        if (loadValue >= 100) {
-            loadValue = 100;
-            clearInterval(progressInterval);
-            
-            // Trigger Fadeout
-            setTimeout(() => {
-                preloader.classList.add("fade-out");
-                // Initialize animations and canvas
-                initCanvas();
-                initTypewriter();
-                initScrollReveal();
-            }, 400);
-        }
-        progress.style.width = loadValue + "%";
-        if (loadValue > 80) {
-            statusText.innerText = "Connecting UI Modules...";
-        } else if (loadValue > 40) {
-            statusText.innerText = "Loading Neural Networks...";
-        }
-    }, 80);
+    if (preloader && progress) {
+        let loadValue = 0;
+        const progressInterval = setInterval(() => {
+            loadValue += Math.floor(Math.random() * 15) + 5;
+            if (loadValue >= 100) {
+                loadValue = 100;
+                clearInterval(progressInterval);
+                
+                // Trigger Fadeout
+                setTimeout(() => {
+                    preloader.classList.add("fade-out");
+                    // Initialize animations and canvas
+                    initCanvas();
+                    initTypewriter();
+                    initScrollReveal();
+                }, 400);
+            }
+            progress.style.width = loadValue + "%";
+            if (statusText) {
+                if (loadValue > 80) {
+                    statusText.innerText = "Connecting UI Modules...";
+                } else if (loadValue > 40) {
+                    statusText.innerText = "Loading Neural Networks...";
+                }
+            }
+        }, 80);
+    } else {
+        // Direct init if no preloader exists
+        initCanvas();
+        initTypewriter();
+        initScrollReveal();
+    }
 });
 
 
@@ -242,17 +251,19 @@ const menuToggleBtn = document.getElementById("menu-toggle-btn");
 const navMenu = document.getElementById("nav-menu");
 const navLinksList = document.querySelectorAll(".nav-link");
 
-menuToggleBtn.addEventListener("click", () => {
-    menuToggleBtn.classList.toggle("open");
-    navMenu.classList.toggle("open");
-});
-
-navLinksList.forEach(link => {
-    link.addEventListener("click", () => {
-        menuToggleBtn.classList.remove("open");
-        navMenu.classList.remove("open");
+if (menuToggleBtn && navMenu) {
+    menuToggleBtn.addEventListener("click", () => {
+        menuToggleBtn.classList.toggle("open");
+        navMenu.classList.toggle("open");
     });
-});
+    
+    navLinksList.forEach(link => {
+        link.addEventListener("click", () => {
+            menuToggleBtn.classList.remove("open");
+            navMenu.classList.remove("open");
+        });
+    });
+}
 
 
 /* ==========================================================================
@@ -351,69 +362,77 @@ const modalProjTech = document.getElementById("modal-project-tech");
 const modalGithubLink = document.getElementById("modal-github-link");
 const modalDemoLink = document.getElementById("modal-demo-link");
 
-detailBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        const projId = btn.getAttribute("data-project-id");
-        const data = projectsData[projId];
-        if (!data) return;
-        
-        // Populate modal data
-        modalProjName.innerText = data.name;
-        modalProjDesc.innerText = data.desc;
-        
-        // Render features
-        modalFeaturesList.innerHTML = "";
-        data.features.forEach(f => {
-            const li = document.createElement("li");
-            li.innerText = f;
-            modalFeaturesList.appendChild(li);
+if (modalOverlay && modalCloseBtn && detailBtns.length > 0) {
+    detailBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const projId = btn.getAttribute("data-project-id");
+            const data = projectsData[projId];
+            if (!data) return;
+            
+            // Populate modal data
+            if (modalProjName) modalProjName.innerText = data.name;
+            if (modalProjDesc) modalProjDesc.innerText = data.desc;
+            
+            // Render features
+            if (modalFeaturesList) {
+                modalFeaturesList.innerHTML = "";
+                data.features.forEach(f => {
+                    const li = document.createElement("li");
+                    li.innerText = f;
+                    modalFeaturesList.appendChild(li);
+                });
+            }
+            
+            // Render tech tags
+            if (modalProjTech) {
+                modalProjTech.innerHTML = "";
+                data.tech.forEach(t => {
+                    const span = document.createElement("span");
+                    span.innerText = t;
+                    modalProjTech.appendChild(span);
+                });
+            }
+            
+            // Render links
+            if (modalGithubLink) modalGithubLink.href = data.github;
+            
+            if (modalDemoLink) {
+                if (data.demo) {
+                    modalDemoLink.href = data.demo;
+                    modalDemoLink.style.display = "inline-flex";
+                } else {
+                    modalDemoLink.style.display = "none";
+                }
+            }
+            
+            // Open modal
+            modalOverlay.classList.add("open");
+            modalOverlay.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden"; // lock page scroll
         });
-        
-        // Render tech tags
-        modalProjTech.innerHTML = "";
-        data.tech.forEach(t => {
-            const span = document.createElement("span");
-            span.innerText = t;
-            modalProjTech.appendChild(span);
-        });
-        
-        // Render links
-        modalGithubLink.href = data.github;
-        
-        if (data.demo) {
-            modalDemoLink.href = data.demo;
-            modalDemoLink.style.display = "inline-flex";
-        } else {
-            modalDemoLink.style.display = "none";
-        }
-        
-        // Open modal
-        modalOverlay.classList.add("open");
-        modalOverlay.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden"; // lock page scroll
     });
-});
 
-function closeModal() {
-    modalOverlay.classList.remove("open");
-    modalOverlay.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = ""; // unlock scroll
+    function closeModal() {
+        modalOverlay.classList.remove("open");
+        modalOverlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = ""; // unlock scroll
+    }
+
+    modalCloseBtn.addEventListener("click", closeModal);
+
+    modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    // Close modal on Escape key press
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modalOverlay.classList.contains("open")) {
+            closeModal();
+        }
+    });
 }
-
-modalCloseBtn.addEventListener("click", closeModal);
-
-modalOverlay.addEventListener("click", (e) => {
-    if (e.target === modalOverlay) {
-        closeModal();
-    }
-});
-
-// Close modal on Escape key press
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay.classList.contains("open")) {
-        closeModal();
-    }
-});
 
 
 /* ==========================================================================
@@ -423,108 +442,122 @@ const contactForm = document.getElementById("contact-form");
 const formFeedback = document.getElementById("form-feedback");
 const submitBtn = document.getElementById("btn-submit");
 
-contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    // Check if the user has replaced the placeholder access key
-    const accessKey = contactForm.querySelector('input[name="access_key"]').value;
-    if (accessKey === "YOUR_ACCESS_KEY_HERE" || !accessKey) {
-        formFeedback.className = "form-feedback-message error";
-        formFeedback.style.display = "block";
-        formFeedback.innerText = "Form configuration incomplete. Please add a valid Web3Forms access key in index.html to receive emails.";
+if (contactForm && submitBtn) {
+    contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
         
-        // Auto-fade warning
-        setTimeout(() => {
-            formFeedback.style.display = "none";
-        }, 6000);
-        return;
-    }
-    
-    // Visual loading state
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-spinner fa-spin"></i>`;
-    
-    const name = document.getElementById("input-name").value.trim();
-    const email = document.getElementById("input-email").value.trim();
-    
-    // Create form data payload
-    const formData = new FormData(contactForm);
-    
-    fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-    })
-    .then(async (response) => {
-        const result = await response.json();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        
-        if (response.ok) {
-            // Success state
-            formFeedback.className = "form-feedback-message success";
-            formFeedback.style.display = "block";
-            formFeedback.innerText = `Thank you, ${name}! Your message has been sent successfully. Harsh will get back to you shortly at ${email}.`;
-            contactForm.reset();
-        } else {
-            // Error response
-            formFeedback.className = "form-feedback-message error";
-            formFeedback.style.display = "block";
-            formFeedback.innerText = result.message || "Something went wrong. Please try again later.";
+        // Check if the user has replaced the placeholder access key
+        const accessKey = contactForm.querySelector('input[name="access_key"]').value;
+        if (accessKey === "YOUR_ACCESS_KEY_HERE" || !accessKey) {
+            if (formFeedback) {
+                formFeedback.className = "form-feedback-message error";
+                formFeedback.style.display = "block";
+                formFeedback.innerText = "Form configuration incomplete. Please add a valid Web3Forms access key in index.html to receive emails.";
+                
+                // Auto-fade warning
+                setTimeout(() => {
+                    formFeedback.style.display = "none";
+                }, 6000);
+            }
+            return;
         }
-    })
-    .catch((error) => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        formFeedback.className = "form-feedback-message error";
-        formFeedback.style.display = "block";
-        formFeedback.innerText = "Network connection failed. Please check your internet connection.";
-    })
-    .finally(() => {
-        // Fade out message after 6 seconds
-        setTimeout(() => {
-            formFeedback.style.display = "none";
-        }, 6000);
+        
+        // Visual loading state
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-spinner fa-spin"></i>`;
+        
+        const name = document.getElementById("input-name").value.trim();
+        const email = document.getElementById("input-email").value.trim();
+        
+        // Create form data payload
+        const formData = new FormData(contactForm);
+        
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        })
+        .then(async (response) => {
+            const result = await response.json();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            
+            if (response.ok) {
+                // Success state
+                if (formFeedback) {
+                    formFeedback.className = "form-feedback-message success";
+                    formFeedback.style.display = "block";
+                    formFeedback.innerText = `Thank you, ${name}! Your message has been sent successfully. Harsh will get back to you shortly at ${email}.`;
+                }
+                contactForm.reset();
+            } else {
+                // Error response
+                if (formFeedback) {
+                    formFeedback.className = "form-feedback-message error";
+                    formFeedback.style.display = "block";
+                    formFeedback.innerText = result.message || "Something went wrong. Please try again later.";
+                }
+            }
+        })
+        .catch((error) => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            if (formFeedback) {
+                formFeedback.className = "form-feedback-message error";
+                formFeedback.style.display = "block";
+                formFeedback.innerText = "Network connection failed. Please check your internet connection.";
+            }
+        })
+        .finally(() => {
+            // Fade out message after 6 seconds
+            setTimeout(() => {
+                if (formFeedback) formFeedback.style.display = "none";
+            }, 6000);
+        });
     });
-});
+}
 
 /* ==========================================================================
    LIGHT/DARK THEME TOGGLE HANDLER
    ========================================================================== */
 const themeToggleBtn = document.getElementById("theme-toggle-btn");
-const themeIcon = themeToggleBtn.querySelector("i");
 
-// Set initial icon based on currently loaded theme
-function updateToggleIcon() {
-    const isLight = document.documentElement.getAttribute("data-theme") === "light";
-    if (isLight) {
-        themeIcon.className = "fa-solid fa-moon";
-    } else {
-        themeIcon.className = "fa-solid fa-sun";
-    }
-}
-
-// Initialize icon on page load
-updateToggleIcon();
-
-themeToggleBtn.addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    let targetTheme = "dark";
+if (themeToggleBtn) {
+    const themeIcon = themeToggleBtn.querySelector("i");
     
-    if (currentTheme !== "light") {
-        targetTheme = "light";
+    // Set initial icon based on currently loaded theme
+    function updateToggleIcon() {
+        if (!themeIcon) return;
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
+        if (isLight) {
+            themeIcon.className = "fa-solid fa-moon";
+        } else {
+            themeIcon.className = "fa-solid fa-sun";
+        }
     }
     
-    // Set theme attribute
-    if (targetTheme === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
-    } else {
-        document.documentElement.removeAttribute("data-theme");
-    }
-    
-    // Save preference
-    localStorage.setItem("theme", targetTheme);
-    
-    // Update button icon
+    // Initialize icon on page load
     updateToggleIcon();
-});
+    
+    themeToggleBtn.addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        let targetTheme = "dark";
+        
+        if (currentTheme !== "light") {
+            targetTheme = "light";
+        }
+        
+        // Set theme attribute
+        if (targetTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+        }
+        
+        // Save preference
+        localStorage.setItem("theme", targetTheme);
+        
+        // Update button icon
+        updateToggleIcon();
+    });
+}

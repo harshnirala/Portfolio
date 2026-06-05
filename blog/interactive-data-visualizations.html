@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to recursively parse complex hierarchical roadmaps and render them as interactive Directed Acyclic Graphs (DAGs) using React Flow.">
+    <meta name="author" content="Harsh Nirala">
+    <title>Interactive Data Visualizations: Rendering Dynamic DAGs in React Flow | Harsh Nirala Blog</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Inline Theme Initializer -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+<body>
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="navbar-header">
+        <div class="navbar-container">
+            <a href="../#home" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>HN<span class="logo-bracket">/&gt;</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="../#home" class="nav-link">Home</a>
+                <a href="../#about" class="nav-link">About</a>
+                <a href="../#projects" class="nav-link">Projects</a>
+                <a href="../#blog" class="nav-link active">Blog</a>
+                <a href="../#contact" class="nav-link">Contact</a>
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <a href="../#blog" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> <span>Back to Blog</span>
+        </a>
+        
+        <article class="article-card glass-panel">
+            <div class="blog-card-meta article-post-meta">
+                <span class="article-date"><i class="fa-solid fa-calendar-days"></i> Feb 20, 2026</span>
+                <span class="article-readtime"><i class="fa-solid fa-clock"></i> 5 min read</span>
+                <span class="article-category"><i class="fa-solid fa-tag"></i> Frontend Development</span>
+            </div>
+            
+            <h1 class="article-post-title">Interactive Data Visualizations: Rendering Dynamic DAGs in React Flow</h1>
+            
+            <div class="article-post-body">
+                <p>When presenting educational roadmaps or complex dependencies, displaying information in a static bulleted list makes it difficult to see relationships between topics. Visualizing content as interactive nodes within a <strong>Directed Acyclic Graph (DAG)</strong> offers a more engaging and intuitive user experience. In this post, we'll walk through how to recursively parse hierarchical goal-based roadmaps (similar to the system built in <strong>VidyaMarg</strong>) and render them dynamically as interactive, layout-optimized DAG canvas structures using React Flow.</p>
+
+                <h2>Visualizing Roadmaps with React Flow</h2>
+                <p>Generating a dynamic interactive roadmap visual node system requires handling three main layout components:</p>
+                
+                <blockquote>
+                    <strong>1. Structural Hierarchy Parsing:</strong> Recursively parsing the raw hierarchical roadmap structures into flat node and edge lists.<br>
+                    <strong>2. Automated Layout Calculations:</strong> Applying layout engines (like Dagre or NetworkX) to calculate node coordinates automatically, preventing overlap.<br>
+                    <strong>3. Interactive UI Rendering:</strong> Rendering nodes in React Flow with zoom, pan, and collapsible milestone states.
+                </blockquote>
+
+                <h2>Step 1: Flattening Hierarchical Outputs</h2>
+                <p>LLM APIs typically return roadmap structures as nested JSON objects (e.g., milestones containing tasks, which contain sub-tasks). React Flow, however, requires flat arrays of <code>nodes</code> (specifying unique IDs, labels, and X/Y coordinates) and <code>edges</code> (defining connections between source and target IDs).</p>
+
+                <p>We use a recursive function to flatten the nested JSON tree and generate clean edge connections:</p>
+
+                <pre><code>// Recursively parse nested roadmap milestones into React Flow arrays
+function flattenRoadmap(milestone, parentId = null, nodes = [], edges = []) {
+    const nodeId = `node-${milestone.id}`;
+    
+    // 1. Create and add node definition
+    nodes.push({
+        id: nodeId,
+        type: 'customMilestone', // Custom React Flow node type
+        data: { label: milestone.title, description: milestone.desc },
+        position: { x: 0, y: 0 } // Layout coordinates will be calculated next
+    });
+    
+    // 2. Map edge connection from parent
+    if (parentId) {
+        edges.push({
+            id: `edge-${parentId}-${nodeId}`,
+            source: parentId,
+            target: nodeId,
+            animated: true,
+            style: { stroke: '#06B6D4' } // Cyan glow edge styling
+        });
+    }
+    
+    // 3. Process child milestones recursively
+    if (milestone.children &amp;&amp; milestone.children.length > 0) {
+        milestone.children.forEach(child => {
+            flattenRoadmap(child, nodeId, nodes, edges);
+        });
+    }
+    
+    return { nodes, edges };
+}
+</code></pre>
+
+                <h2>Step 2: Calculating Node Coordinates with Dagre</h2>
+                <p>Setting node coordinates manually leads to messy layouts. To calculate coordinates automatically, we use the <code>dagre</code> layout library. Dagre takes our flat nodes and edges list, analyzes the hierarchy direction (e.g., Left-to-Right or Top-to-Bottom), and calculates optimized X and Y coordinates for each node.</p>
+
+                <pre><code>import dagre from 'dagre';
+
+const calculateLayout = (nodes, edges, direction = 'TB') => {
+    const dagreGraph = new dagre.graphlib.Graph();
+    dagreGraph.setDefaultEdgeLabel(() => ({}));
+    dagreGraph.setGraph({ rankdir: direction, nodesep: 70, ranksep: 100 });
+
+    // Populate dagre nodes
+    nodes.forEach(node => {
+        dagreGraph.setNode(node.id, { width: 200, height: 80 });
+    });
+
+    // Populate dagre edges
+    edges.forEach(edge => {
+        dagreGraph.setEdge(edge.source, edge.target);
+    });
+
+    // Calculate layout coordinates
+    dagre.layout(dagreGraph);
+
+    // Map calculated positions back to React Flow nodes
+    return nodes.map(node => {
+        const nodeWithPosition = dagreGraph.node(node.id);
+        return {
+            ...node,
+            position: {
+                x: nodeWithPosition.x - 100, // adjust centered offset
+                y: nodeWithPosition.y - 40
+            }
+        };
+    });
+};
+</code></pre>
+
+                <h2>Step 3: Creating a Responsive, Glassmorphic Canvas</h2>
+                <p>To match our overall portfolio theme, we wrap the React Flow renderer in a glassmorphic container and customize the node templates. Milestone nodes are styled with semi-transparent backgrounds, blur filters, and neon borders. To enhance interactivity, we enable animated connection lines and configure tooltips to show detail summaries when hovering over nodes.</p>
+
+                <h2>Conclusion</h2>
+                <p>Displaying data visually shifts web applications from passive reading logs to active, engaging experiences. By using React Flow and Dagre layout engines, we can easily build responsive and clean graph visualizer platforms. This setup helps users understand learning sequences at a glance, improving information absorption and overall application engagement.</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">&lt;HN/&gt;</div>
+            <p class="footer-tagline">Architecting intelligent web systems & scalable backend codebases.</p>
+            <div class="footer-separator"></div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Harsh Nirala. All rights reserved.</p>
+                <p class="footer-credit">Handcrafted with <i class="fa-solid fa-heart" style="color: #EE4C2C;"></i> & Vanilla CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Entrypoint -->
+    <script src="../script.js"></script>
+</body>
+</html>
