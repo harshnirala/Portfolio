@@ -426,31 +426,64 @@ const submitBtn = document.getElementById("btn-submit");
 contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
     
+    // Check if the user has replaced the placeholder access key
+    const accessKey = contactForm.querySelector('input[name="access_key"]').value;
+    if (accessKey === "YOUR_ACCESS_KEY_HERE" || !accessKey) {
+        formFeedback.className = "form-feedback-message error";
+        formFeedback.style.display = "block";
+        formFeedback.innerText = "Form configuration incomplete. Please add a valid Web3Forms access key in index.html to receive emails.";
+        
+        // Auto-fade warning
+        setTimeout(() => {
+            formFeedback.style.display = "none";
+        }, 6000);
+        return;
+    }
+    
     // Visual loading state
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-spinner fa-spin"></i>`;
     
-    // Grab input values
     const name = document.getElementById("input-name").value.trim();
     const email = document.getElementById("input-email").value.trim();
     
-    // Simulate API call dispatch
-    setTimeout(() => {
+    // Create form data payload
+    const formData = new FormData(contactForm);
+    
+    fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+    })
+    .then(async (response) => {
+        const result = await response.json();
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
         
-        // Show success state
-        formFeedback.className = "form-feedback-message success";
-        formFeedback.innerText = `Thank you, ${name}! Your message has been sent successfully. Harsh will get back to you shortly at ${email}.`;
-        
-        // Reset form inputs
-        contactForm.reset();
-        
+        if (response.ok) {
+            // Success state
+            formFeedback.className = "form-feedback-message success";
+            formFeedback.style.display = "block";
+            formFeedback.innerText = `Thank you, ${name}! Your message has been sent successfully. Harsh will get back to you shortly at ${email}.`;
+            contactForm.reset();
+        } else {
+            // Error response
+            formFeedback.className = "form-feedback-message error";
+            formFeedback.style.display = "block";
+            formFeedback.innerText = result.message || "Something went wrong. Please try again later.";
+        }
+    })
+    .catch((error) => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        formFeedback.className = "form-feedback-message error";
+        formFeedback.style.display = "block";
+        formFeedback.innerText = "Network connection failed. Please check your internet connection.";
+    })
+    .finally(() => {
         // Fade out message after 6 seconds
         setTimeout(() => {
             formFeedback.style.display = "none";
         }, 6000);
-        
-    }, 1500);
+    });
 });
