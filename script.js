@@ -487,3 +487,44 @@ contactForm.addEventListener("submit", (e) => {
         }, 6000);
     });
 });
+
+/* ==========================================================================
+   LIGHT/DARK THEME TOGGLE HANDLER
+   ========================================================================== */
+const themeToggleBtn = document.getElementById("theme-toggle-btn");
+const themeIcon = themeToggleBtn.querySelector("i");
+
+// Set initial icon based on currently loaded theme
+function updateToggleIcon() {
+    const isLight = document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+        themeIcon.className = "fa-solid fa-moon";
+    } else {
+        themeIcon.className = "fa-solid fa-sun";
+    }
+}
+
+// Initialize icon on page load
+updateToggleIcon();
+
+themeToggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    let targetTheme = "dark";
+    
+    if (currentTheme !== "light") {
+        targetTheme = "light";
+    }
+    
+    // Set theme attribute
+    if (targetTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+    } else {
+        document.documentElement.removeAttribute("data-theme");
+    }
+    
+    // Save preference
+    localStorage.setItem("theme", targetTheme);
+    
+    // Update button icon
+    updateToggleIcon();
+});

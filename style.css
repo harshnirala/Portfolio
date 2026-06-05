@@ -1601,3 +1601,168 @@ a.contact-value:hover {
         width: 100%;
     }
 }
+
+/* ==========================================================================
+   LIGHT THEME VARIABLES & OVERRIDES
+   ========================================================================== */
+[data-theme="light"] {
+    --bg-main: #f8fafc;
+    --bg-surface: rgba(255, 255, 255, 0.75);
+    --bg-surface-opaque: #ffffff;
+    --bg-card-hover: rgba(255, 255, 255, 0.95);
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    
+    --color-purple: 275, 80%, 50%;
+    --color-cyan: 185, 85%, 40%;
+    --color-indigo: 250, 80%, 55%;
+    
+    --border-glass: 1px solid rgba(15, 23, 42, 0.08);
+    --border-glass-focus: 1px solid rgba(6, 182, 212, 0.5);
+    --shadow-glass: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+    
+    --gradient-text: linear-gradient(135deg, #0f172a 30%, var(--accent-cyan) 70%, var(--accent-purple) 100%);
+    --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.06), rgba(6, 182, 212, 0.06));
+}
+
+/* Light Mode Specific Overrides */
+[data-theme="light"] .preloader-overlay {
+    background-color: #f8fafc;
+}
+
+[data-theme="light"] #bg-canvas {
+    opacity: 0.45;
+}
+
+[data-theme="light"] .navbar-header {
+    background: rgba(248, 250, 252, 0.85);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .nav-link:hover, 
+[data-theme="light"] .nav-link.active {
+    color: #0f172a;
+}
+
+[data-theme="light"] .nav-logo {
+    color: #0f172a;
+}
+
+[data-theme="light"] .logo-bracket {
+    color: var(--accent-cyan);
+}
+
+[data-theme="light"] .btn-secondary {
+    background: rgba(15, 23, 42, 0.03);
+    color: var(--text-primary);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+    background: rgba(15, 23, 42, 0.06);
+    border-color: var(--accent-cyan);
+}
+
+[data-theme="light"] .skill-item {
+    background: rgba(15, 23, 42, 0.02);
+    border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .skill-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+[data-theme="light"] .experience-details li {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .project-summary {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .modal-overlay {
+    background: rgba(248, 250, 252, 0.85);
+}
+
+[data-theme="light"] .modal-project-desc {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .modal-features-list li {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .form-input, 
+[data-theme="light"] .form-textarea {
+    background: rgba(15, 23, 42, 0.02);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+}
+
+[data-theme="light"] .form-input:focus, 
+[data-theme="light"] .form-textarea:focus {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+[data-theme="light"] .form-input::placeholder, 
+[data-theme="light"] .form-textarea::placeholder {
+    color: #94a3b8;
+}
+
+[data-theme="light"] .footer {
+    background: #f1f5f9;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .footer-logo {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Theme Toggle Button Style */
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: var(--border-glass);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition-normal);
+    outline: none;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-cyan);
+    transform: rotate(15deg) scale(1.05);
+}
+
+[data-theme="light"] .theme-toggle-btn {
+    background: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+    background: rgba(15, 23, 42, 0.06);
+    border-color: var(--accent-cyan);
+}
+
+/* Adjust mobile layout spacing for toggle button */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        margin: 10px 0;
+        width: 48px;
+        height: 48px;
+        font-size: 1.15rem;
+    }
+}

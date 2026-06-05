@@ -22,6 +22,16 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Inline Theme Initializer -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
 </head>
 <body>
     <!-- Interactive Background Canvas -->
@@ -60,6 +70,10 @@
                 <a href="#projects" class="nav-link" id="nav-projects">Projects</a>
                 <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
                 <a href="docs/Harsh_Nirala_Resume.pdf" class="nav-link" id="nav-resume" target="_blank">Resume</a>
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
                 <a href="mailto:info.driftking.harshnirala@gmail.com" class="nav-cta" id="nav-cta-email">Hire Me</a>
             </nav>
         </div>
