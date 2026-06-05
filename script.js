@@ -561,3 +561,28 @@ if (themeToggleBtn) {
         updateToggleIcon();
     });
 }
+
+/* ==========================================================================
+   RESUME TAB PREVIEW SWITCHER
+   ========================================================================== */
+const resumeTabBtns = document.querySelectorAll(".resume-tab-btn");
+const resumeTabPanels = document.querySelectorAll(".resume-tab-panel");
+
+if (resumeTabBtns.length > 0 && resumeTabPanels.length > 0) {
+    resumeTabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const tabId = btn.getAttribute("data-tab");
+            
+            // Remove active class from all buttons and panels
+            resumeTabBtns.forEach(b => b.classList.remove("active"));
+            resumeTabPanels.forEach(p => p.classList.remove("active"));
+            
+            // Add active class to current button and panel
+            btn.classList.add("active");
+            const activePanel = document.getElementById(tabId);
+            if (activePanel) {
+                activePanel.classList.add("active");
+            }
+        });
+    });
+}

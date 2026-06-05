@@ -182,16 +182,16 @@
                     </div>
                     <div class="about-text-content">
                         <p class="about-lead">
-                            I design and build tools that live on the internet, turning complex requirements into seamless, performant digital solutions.
+                            I'm a B.Tech student focused on Full-Stack Development and Problem Solving.
                         </p>
                         <p class="about-body">
-                            I am currently pursuing a degree in Computer Science at <strong>Parul University</strong> in Vadodara, Gujarat. I enjoy breaking complex problems down, building clean database layouts, and engineering robust APIs. My goal is to write code that is not only functional and secure but also visually impactful.
-                        </p>
-                        <p class="about-body">
-                            Whether experimenting with advanced LLM agents or building responsive, interactive front-ends using React and Tailwind CSS, I am always seeking ways to push the envelope of software engineering.
+                            I enjoy building scalable web applications using React, Next.js, Java, and modern development tools. My goal is to become a software engineer who creates impactful products.
                         </p>
                         <div class="about-ctas" style="margin-top: 30px;">
-                            <a href="docs/Harsh_Nirala_Resume.pdf" class="btn btn-primary" id="btn-about-resume" target="_blank">
+                            <a href="#about-resume-preview" class="btn btn-primary" id="btn-about-resume-view">
+                                <i class="fa-solid fa-file-invoice"></i> <span>View Resume Preview</span>
+                            </a>
+                            <a href="docs/Harsh_Nirala_Resume.pdf" class="btn btn-secondary" id="btn-about-resume-download" target="_blank">
                                 <i class="fa-solid fa-download"></i> <span>Download Resume</span>
                             </a>
                         </div>
@@ -232,6 +232,112 @@
                                 <span class="stat-label">Undergrad</span>
                             </div>
                             <div class="stat-desc">Parul University student</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Preview Widget -->
+                <div class="resume-preview-container glass-panel scroll-reveal" id="about-resume-preview">
+                    <div class="resume-preview-header">
+                        <h3 class="resume-preview-title"><i class="fa-solid fa-file-invoice"></i> Resume Highlights</h3>
+                        <div class="resume-preview-actions">
+                            <a href="docs/Harsh_Nirala_Resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-action-link view-action"><i class="fa-solid fa-eye"></i> View Resume</a>
+                            <span class="action-divider">|</span>
+                            <a href="docs/Harsh_Nirala_Resume.pdf" download class="resume-action-link download-action"><i class="fa-solid fa-download"></i> Download PDF</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-tabs-nav">
+                        <button class="resume-tab-btn active" data-tab="res-experience"><i class="fa-solid fa-briefcase"></i> Experience</button>
+                        <button class="resume-tab-btn" data-tab="res-education"><i class="fa-solid fa-graduation-cap"></i> Education</button>
+                        <button class="resume-tab-btn" data-tab="res-skills"><i class="fa-solid fa-gears"></i> Skills</button>
+                        <button class="resume-tab-btn" data-tab="res-certs"><i class="fa-solid fa-award"></i> Certifications</button>
+                    </div>
+                    
+                    <div class="resume-tabs-content">
+                        <!-- Experience Tab -->
+                        <div class="resume-tab-panel active" id="res-experience">
+                            <div class="resume-item">
+                                <div class="resume-item-header">
+                                    <h4 class="resume-item-title">Software Developer Intern</h4>
+                                    <span class="resume-item-date">Sep 2024 - Present</span>
+                                </div>
+                                <h5 class="resume-item-subtitle">Unstop</h5>
+                                <ul class="resume-item-bullets">
+                                    <li>Integrated AI-driven n8n automation workflows across internal REST APIs and a custom CMS, adding white-label support and dynamic window-title configurations.</li>
+                                    <li>Built an AI workflow system to auto-generate and validate vendor assignments, cutting processing time by 60–70%.</li>
+                                    <li>Enhanced front-end UI components to surface the new workflow system, streamlining vendor task flows.</li>
+                                    <li>Managed CI/CD deployment pipelines using Git and Jenkins.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Education Tab -->
+                        <div class="resume-tab-panel" id="res-education">
+                            <div class="resume-item">
+                                <div class="resume-item-header">
+                                    <h4 class="resume-item-title">B.Tech in Computer Science & Engineering (AI)</h4>
+                                    <span class="resume-item-date">2023 - 2027</span>
+                                </div>
+                                <h5 class="resume-item-subtitle">Parul University</h5>
+                                <p class="resume-item-desc">Pursuing specialized undergraduate studies in Artificial Intelligence architectures, database optimizations, and full-stack software system development. Vadodara, Gujarat.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills Tab -->
+                        <div class="resume-tab-panel" id="res-skills">
+                            <div class="resume-skills-grid">
+                                <div class="resume-skills-group">
+                                    <h4><i class="fa-solid fa-code"></i> Languages</h4>
+                                    <p>Python, Java, JavaScript, SQL</p>
+                                </div>
+                                <div class="resume-skills-group">
+                                    <h4><i class="fa-solid fa-cloud"></i> Cloud & DevOps</h4>
+                                    <p>AWS (EC2, S3, Lambda, IAM), Docker, CI/CD Basics</p>
+                                </div>
+                                <div class="resume-skills-group">
+                                    <h4><i class="fa-solid fa-cubes"></i> Frameworks & DBs</h4>
+                                    <p>React, Next.js, Spring Boot, Spring MVC, REST APIs, MySQL, MongoDB</p>
+                                </div>
+                                <div class="resume-skills-group">
+                                    <h4><i class="fa-solid fa-brain"></i> Specializations</h4>
+                                    <p>Machine Learning, Generative AI, RAG Pipelines, Vector Stores</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certifications Tab -->
+                        <div class="resume-tab-panel" id="res-certs">
+                            <ul class="resume-certs-list">
+                                <li>
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <div>
+                                        <h4>AWS Certified Cloud Practitioner</h4>
+                                        <p>Amazon Web Services</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <div>
+                                        <h4>Cisco Data Science Certified</h4>
+                                        <p>Cisco Networking Academy</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <div>
+                                        <h4>Google ML Crash Course</h4>
+                                        <p>Google Developer Group</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <div>
+                                        <h4>IBM AI Fundamentals</h4>
+                                        <p>IBM Developer Skills Network</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
