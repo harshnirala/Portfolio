@@ -215,11 +215,12 @@ function initScrollReveal() {
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section");
     
-    // Set stagger delays for child elements within reveal containers dynamically
+    // Set stagger delays dynamically (disabled on mobile to prevent stacked items lag)
+    const isMobile = window.innerWidth < 768;
     revealElements.forEach(container => {
         const children = container.querySelectorAll(".scroll-reveal-child");
         children.forEach((child, index) => {
-            child.style.transitionDelay = `${(index + 1) * 0.08}s`;
+            child.style.transitionDelay = isMobile ? "0s" : `${(index + 1) * 0.08}s`;
         });
     });
     
@@ -603,6 +604,9 @@ if (resumeTabBtns.length > 0 && resumeTabPanels.length > 0) {
    MAGNETIC CALL-TO-ACTION BUTTONS
    ========================================================================== */
 function initMagneticButtons() {
+    // Only enable magnetic effects on devices with hover-capable pointers (desktop/laptops)
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    
     const magneticBtns = document.querySelectorAll(".btn-magnetic");
     
     magneticBtns.forEach(btn => {
@@ -648,6 +652,9 @@ function initMagneticButtons() {
    INTERACTIVE CARD HOVER GLOWS
    ========================================================================== */
 function initCardHoverGlows() {
+    // Only enable coordinates tracking on devices with hover-capable pointers
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    
     const cards = document.querySelectorAll(".project-card, .blog-card, .skills-category-card, .currently-learning-container");
     
     cards.forEach(card => {
