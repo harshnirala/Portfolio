@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     initCanvas();
                     initTypewriter();
                     initScrollReveal();
+                    initMagneticButtons();
+                    initCardHoverGlows();
                 }, 400);
             }
             progress.style.width = loadValue + "%";
@@ -37,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         initCanvas();
         initTypewriter();
         initScrollReveal();
+        initMagneticButtons();
+        initCardHoverGlows();
     }
 });
 
@@ -210,6 +214,14 @@ function initScrollReveal() {
     const revealElements = document.querySelectorAll(".scroll-reveal");
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section");
+    
+    // Set stagger delays for child elements within reveal containers dynamically
+    revealElements.forEach(container => {
+        const children = container.querySelectorAll(".scroll-reveal-child");
+        children.forEach((child, index) => {
+            child.style.transitionDelay = `${(index + 1) * 0.08}s`;
+        });
+    });
     
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -583,6 +595,69 @@ if (resumeTabBtns.length > 0 && resumeTabPanels.length > 0) {
             if (activePanel) {
                 activePanel.classList.add("active");
             }
+        });
+    });
+}
+
+/* ==========================================================================
+   MAGNETIC CALL-TO-ACTION BUTTONS
+   ========================================================================== */
+function initMagneticButtons() {
+    const magneticBtns = document.querySelectorAll(".btn-magnetic");
+    
+    magneticBtns.forEach(btn => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            // Get mouse position relative to button center
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            
+            // Apply magnetic translate
+            const strength = 0.25; // Pull factor
+            const moveX = deltaX * strength;
+            const moveY = deltaY * strength;
+            
+            btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            
+            // Add parallax depth to inner text/icon if present
+            const innerElements = btn.querySelectorAll("span, i");
+            innerElements.forEach(inner => {
+                inner.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
+            });
+        });
+        
+        btn.addEventListener("mouseenter", () => {
+            btn.classList.add("is-hovered");
+        });
+        
+        btn.addEventListener("mouseleave", () => {
+            btn.classList.remove("is-hovered");
+            btn.style.transform = "translate(0px, 0px)";
+            
+            const innerElements = btn.querySelectorAll("span, i");
+            innerElements.forEach(inner => {
+                inner.style.transform = "translate(0px, 0px)";
+            });
+        });
+    });
+}
+
+/* ==========================================================================
+   INTERACTIVE CARD HOVER GLOWS
+   ========================================================================== */
+function initCardHoverGlows() {
+    const cards = document.querySelectorAll(".project-card, .blog-card, .skills-category-card, .currently-learning-container");
+    
+    cards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty("--mouse-x", `${x}px`);
+            card.style.setProperty("--mouse-y", `${y}px`);
         });
     });
 }
