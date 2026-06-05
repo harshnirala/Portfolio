@@ -356,6 +356,11 @@ input, textarea, button {
     border: none;
 }
 
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
 .btn-primary {
     background: var(--gradient-secondary);
     color: var(--bg-main);
@@ -2028,6 +2033,17 @@ a.contact-value:hover {
 .btn-magnetic.is-hovered span,
 .btn-magnetic.is-hovered i {
     transition: none;
+}
+
+/* Force centering and reset transitions when magnetic button is disabled (e.g. during form submission) */
+.btn-magnetic:disabled {
+    transform: none !important;
+    pointer-events: none;
+}
+
+.btn-magnetic:disabled span,
+.btn-magnetic:disabled i {
+    transform: none !important;
 }
 
 /* Card Mouse-Tracking Radial Hover Glow */
