@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
    ========================================================================== */
 let canvas, ctx;
 let particles = [];
-const particleCount = 75;
+const particleCount = window.innerWidth < 768 ? 30 : 75;
 const mouse = { x: null, y: null, radius: 150 };
 
 function initCanvas() {

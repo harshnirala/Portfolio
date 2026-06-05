@@ -6,17 +6,24 @@
     <meta name="description" content="Discover how to design and scale backend automation systems using n8n and custom webhook API triggers to optimize workflow tasks.">
     <meta name="author" content="Harsh Nirala">
     <title>Scaling Backend Workflows: Orchestrating AI Automations with n8n | Harsh Nirala Blog</title>
-    
-    <!-- Google Fonts -->
+    <!-- Resource preconnects & DNS prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts (Non-blocking loading via media swap) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
     
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <!-- FontAwesome Icons (Non-blocking loading via media swap) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../style.css">
+    
+    <!-- Script Entrypoint (Deferred execution) -->
+    <script src="../script.js" defer></script>
     
     <!-- Inline Theme Initializer -->
     <script>
@@ -152,7 +159,5 @@ return {
         </div>
     </footer>
 
-    <!-- Script Entrypoint -->
-    <script src="../script.js"></script>
 </body>
 </html>

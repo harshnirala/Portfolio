@@ -50,16 +50,24 @@
     
     <title>Harsh Nirala | Full Stack Engineer & AI Developer</title>
     
-    <!-- Google Fonts -->
+    <!-- Resource preconnects & DNS prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts (Non-blocking loading via media swap) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
     
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <!-- FontAwesome Icons (Non-blocking loading via media swap) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Script Entrypoint (Deferred execution) -->
+    <script src="script.js" defer></script>
     
     <!-- Inline Theme Initializer -->
     <script>
@@ -168,7 +176,7 @@
                 <div class="about-grid">
                     <div class="about-image-container">
                         <div class="about-image-wrapper glass-panel">
-                            <img src="me.jpg" alt="Harsh Nirala Profile" id="about-profile-img">
+                            <img src="me.jpg" alt="Harsh Nirala Profile" id="about-profile-img" loading="lazy" decoding="async">
                             <div class="image-glow-ring"></div>
                         </div>
                     </div>
@@ -754,7 +762,5 @@
         </div>
     </div>
 
-    <!-- Script Entrypoint -->
-    <script src="script.js"></script>
 </body>
 </html>
