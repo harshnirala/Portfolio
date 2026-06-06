@@ -1713,6 +1713,11 @@ a.contact-value:hover {
     box-shadow: 0 0 15px rgba(29, 161, 242, 0.3);
 }
 
+.instagram-glow:hover {
+    border-color: #e1306c;
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.3);
+}
+
 .contact-form-column {
     padding: 40px;
 }
