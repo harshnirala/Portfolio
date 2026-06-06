@@ -473,6 +473,22 @@ if (contactForm && submitBtn) {
             return;
         }
         
+        // Check if hCaptcha is completed (if the widget exists on page)
+        const hCaptchaWidget = contactForm.querySelector('.h-captcha');
+        const hCaptchaResponse = contactForm.querySelector('textarea[name="h-captcha-response"]');
+        if (hCaptchaWidget && (!hCaptchaResponse || !hCaptchaResponse.value)) {
+            if (formFeedback) {
+                formFeedback.className = "form-feedback-message error";
+                formFeedback.style.display = "block";
+                formFeedback.innerText = "Please complete the hCaptcha verification.";
+                
+                setTimeout(() => {
+                    formFeedback.style.display = "none";
+                }, 6000);
+            }
+            return;
+        }
+        
         // Visual loading state
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.disabled = true;
