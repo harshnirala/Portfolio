@@ -264,11 +264,26 @@ input, textarea, button {
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -1px;
+    color: var(--text-primary);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+}
+
+.nav-logo:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.6), 0 0 30px rgba(168, 85, 247, 0.3);
 }
 
 .logo-bracket {
     color: var(--accent-cyan);
     font-weight: 400;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-shadow: 0 0 8px rgba(6, 182, 212, 0.25);
+}
+
+.nav-logo:hover .logo-bracket {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 15px var(--accent-cyan), 0 0 30px rgba(6, 182, 212, 0.6);
 }
 
 .nav-menu {
@@ -2354,10 +2369,22 @@ a.contact-value:hover {
 
 [data-theme="light"] .nav-logo {
     color: #0f172a;
+    text-shadow: none;
+}
+
+[data-theme="light"] .nav-logo:hover {
+    color: #0f172a;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
 }
 
 [data-theme="light"] .logo-bracket {
     color: var(--accent-cyan);
+    text-shadow: none;
+}
+
+[data-theme="light"] .nav-logo:hover .logo-bracket {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
 }
 
 [data-theme="light"] .btn-secondary {
