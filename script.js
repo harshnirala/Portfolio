@@ -480,9 +480,11 @@ if (contactForm && submitBtn) {
         
         const name = document.getElementById("input-name").value.trim();
         const email = document.getElementById("input-email").value.trim();
+        const userSubject = document.getElementById("input-subject") ? document.getElementById("input-subject").value.trim() : "General Inquiry";
         
         // Create form data payload
         const formData = new FormData(contactForm);
+        formData.set("subject", `New Portfolio Contact Form Submission - ${userSubject}`);
         
         fetch("https://api.web3forms.com/submit", {
             method: "POST",
