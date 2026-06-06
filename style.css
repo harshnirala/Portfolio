@@ -330,6 +330,7 @@ input, textarea, button {
     font-weight: 600;
     font-size: 0.9rem;
     box-shadow: var(--shadow-purple);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .nav-cta:hover {
@@ -682,6 +683,13 @@ section {
     font-size: 1.05rem;
     color: var(--text-secondary);
     margin-bottom: 20px;
+}
+
+.about-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .about-stats-container {
@@ -2297,6 +2305,15 @@ a.contact-value:hover {
         flex-direction: column;
         text-align: center;
     }
+    
+    .about-ctas {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .about-ctas .btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2317,7 +2334,8 @@ a.contact-value:hover {
         width: 100%;
     }
     
-    .btn {
+    .hero-ctas .btn,
+    .contact-form .btn {
         width: 100%;
     }
 }
