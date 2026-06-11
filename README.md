@@ -58,30 +58,9 @@ You can read the Markdown versions of the articles directly on GitHub:
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Running Globally
 
-To host the static files on a local server, you can use Python's built-in HTTP server:
+Open your browser and navigate to:
+   👉 **harshnirala.vercel.app**
 
-1. Open your terminal in the project directory:
-   ```bash
-   cd d:\TP\ANTIGRAVITY\portfolio
-   ```
-2. Start the local server:
-   ```bash
-   python -m http.server 3000
-   ```
-3. Open your browser and navigate to:
-   👉 **[http://localhost:3000/](http://localhost:3000/)**
 
----
-
-## 🌐 Deploying to GitHub
-
-We have provided an automated deploy script to make pushing your new website to GitHub simple:
-
-1. Make sure you have created an empty repository on your account at [github.com/new](https://github.com/new). Do **not** initialize it with a README.
-2. In your terminal inside the project directory, run:
-   ```powershell
-   .\push.ps1
-   ```
-3. The script will initialize your local Git branch, commit the files, link your GitHub repository, and open a secure popup window to authenticate and complete the upload.
